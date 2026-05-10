@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>404 - 页面未找到</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* 针对404页面的特殊布局微调 */
+        .error-container {
+            text-align: center;
+        }
+        
+        .error-code {
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 20px;
+            letter-spacing: -0.05em;
+            background: linear-gradient(135deg, var(--text-main), var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .error-message {
+            margin-bottom: 40px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 30px;
+            background-color: var(--text-main);
+            color: var(--bg-color);
+            border-radius: 25px; /* 药丸型按钮更具现代感 */
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .back-btn:active {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container error-container">
+        <div class="error-code">404</div>
+        
+        <div class="header error-message">
+            <h1>抱歉，页面走丢了</h1>
+            <p>你访问的地址可能已被移除或暂时不可用</p>
+        </div>
+
+        <a href="/" class="back-btn">返回首页</a>
+    </div>
+
+    <script>
+        // 入场动效逻辑（如果需要的话，也可以直接写在JS文件里）
+        window.onload = () => {
+            document.body.style.opacity = '1';
+        };
+    </script>
+</body>
+</html>
