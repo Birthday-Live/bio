@@ -1,5 +1,4 @@
 :root {
-    /* 浅色模式变量 */
     --bg-color: #fcfcfc;
     --text-main: #1d1d1f;
     --text-muted: #86868b;
@@ -13,7 +12,6 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        /* 深色模式变量 */
         --bg-color: #000000;
         --text-main: #f5f5f7;
         --text-muted: #6e6e73;
@@ -38,38 +36,20 @@ body {
     background-color: var(--bg-color);
     color: var(--text-main);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    transition: background-color 0.5s ease;
-    overflow: hidden;
+    transition: background-color 0.5s ease, opacity 0.5s ease;
 }
 
 .container {
     width: 85%;
     max-width: 400px;
-    animation: fadeInScreen 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.8s ease-out;
 }
 
-.header {
-    margin-bottom: 32px;
-}
+.header { margin-bottom: 32px; }
+.header h1 { font-size: 24px; font-weight: 600; }
+.header p { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
 
-.header h1 {
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-}
-
-.header p {
-    font-size: 14px;
-    color: var(--text-muted);
-    margin-top: 4px;
-}
-
-/* 列表项样式 */
-.nav-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
+.nav-list { display: flex; flex-direction: column; gap: 12px; }
 
 .nav-item {
     display: flex;
@@ -79,46 +59,21 @@ body {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 14px;
-    text-decoration: none;
-    color: var(--text-main);
+    cursor: pointer;
     transition: all 0.2s ease;
 }
 
-.nav-item:active {
-    transform: scale(0.98);
-    background-color: var(--border-color);
-}
+.nav-item:active { transform: scale(0.98); background-color: var(--border-color); }
 
-.item-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+.item-info { display: flex; align-items: center; gap: 12px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.label { font-size: 15px; font-weight: 500; }
+.arrow { font-size: 18px; color: var(--text-muted); }
 
-.dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-}
-
-.label {
-    font-size: 16px;
-    font-weight: 500;
-}
-
-.arrow {
-    font-size: 18px;
-    color: var(--text-muted);
-    font-weight: 300;
-}
-
-/* 弹窗样式 */
+/* 弹窗系统 */
 .modal-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: var(--overlay);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -133,44 +88,40 @@ body {
 .modal-card {
     background: var(--card-bg);
     width: 85%;
-    max-width: 320px;
+    max-width: 300px;
     padding: 24px;
     border-radius: 20px;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     transform: translateY(20px);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s ease;
 }
 
-.modal-card h3 {
-    font-size: 18px;
-    margin-bottom: 12px;
-}
-
-.modal-card p {
-    font-size: 14px;
-    color: var(--text-muted);
-    line-height: 1.5;
-    margin-bottom: 24px;
-}
+.modal-card h3 { font-size: 18px; margin-bottom: 12px; }
+.modal-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
 
 .modal-btn {
     width: 100%;
-    padding: 14px;
-    border-radius: 12px;
+    padding: 12px;
+    border-radius: 10px;
     border: none;
     background: var(--text-main);
     color: var(--bg-color);
     font-size: 15px;
     font-weight: 600;
+    margin-bottom: 8px;
     cursor: pointer;
 }
 
-@keyframes fadeInScreen {
+.btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+.show { display: flex; opacity: 1; }
+.show .modal-card { transform: translateY(0); }
+
+@keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-/* 辅助类 */
-.show { display: flex; opacity: 1; }
-.show .modal-card { transform: translateY(0); }
