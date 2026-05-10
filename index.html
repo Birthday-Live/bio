@@ -1,179 +1,84 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>关注窝 - 水喝千束的网站</title>
-
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #f0f2f5;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 80%;
-            max-width: 300px;
-        }
-
-        .btn {
-            display: block;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 12px;
-            transition: transform 0.2s, background-color 0.3s;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border: none;
-            cursor: pointer;
-        }
-
-        /* B站粉 */
-        .btn-1 {
-            background-color: #fb7299;
-        }
-
-        /* 清爽蓝 */
-        .btn-2 {
-            background-color: #00aeec;
-        }
-
-        /* 黑绿渐变 */
-        .btn-3 {
-            background: linear-gradient(135deg, #000000, #00c853);
-        }
-
-        .btn:active {
-            transform: scale(0.95);
-        }
-
-        /* 弹窗背景 */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 999;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* 弹窗内容 */
-        .modal-content {
-            background: #fff;
-            padding: 24px;
-            border-radius: 16px;
-            width: 85%;
-            max-width: 320px;
-            text-align: center;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-            animation: pop 0.2s ease;
-        }
-
-        .modal-content h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            color: #111;
-        }
-
-        .modal-content p {
-            font-size: 15px;
-            line-height: 1.6;
-            color: #444;
-            margin-bottom: 20px;
-        }
-
-        .modal-btn {
-            background: linear-gradient(135deg, #000000, #00c853);
-            color: white;
-            border: none;
-            padding: 12px 18px;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        @keyframes pop {
-            from {
-                transform: scale(0.9);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>内容导航</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
     <div class="container">
-        <a href="https://b23.tv/1NE6ycz" class="btn btn-1">
-            水喝千束
-        </a>
+        <div class="header">
+            <h1>内容导航</h1>
+            <p>选择你想前往的目的地</p>
+        </div>
 
-        <a href="https://b23.tv/o7b2x5u" class="btn btn-2">
-            次放Studio
-        </a>
+        <div class="nav-list">
+            <a href="https://b23.tv/1NE6ycz" class="nav-item">
+                <div class="item-info">
+                    <div class="dot" style="background-color: var(--accent-bili);"></div>
+                    <span class="label">水喝千束</span>
+                </div>
+                <span class="arrow">∟</span>
+            </a>
 
-        <button class="btn btn-3" onclick="openModal()">
-            汽水音乐-水喝千束
-        </button>
+            <a href="https://b23.tv/o7b2x5u" class="nav-item">
+                <div class="item-info">
+                    <div class="dot" style="background-color: var(--accent-studio);"></div>
+                    <span class="label">次放Studio</span>
+                </div>
+                <span class="arrow">∟</span>
+            </a>
+
+            <div class="nav-item" onclick="openModal()" style="cursor: pointer;">
+                <div class="item-info">
+                    <div class="dot" style="background-color: var(--accent-music);"></div>
+                    <span class="label">汽水音乐</span>
+                </div>
+                <span class="arrow">∟</span>
+            </div>
+        </div>
     </div>
 
-    <!-- 弹窗 -->
-    <div class="modal" id="musicModal">
-        <div class="modal-content">
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
             <h3>提示</h3>
-
             <p>
-                进入汽水歌曲界面后，点击关注即可关注。<br><br>
-                如果你已经在 douyin.com 关注了「水喝千束」，则已经自动关注，无需操作。
+                进入汽水歌曲界面后，点击关注即可。<br><br>
+                若已在抖音关注「水喝千束」，系统将自动同步，无需重复操作。
             </p>
-
-            <button class="modal-btn" onclick="goToMusic()">
-                我知道了，继续前往
-            </button>
+            <button class="modal-btn" onclick="goToMusic()">知道了，继续前往</button>
         </div>
     </div>
 
     <script>
+        const overlay = document.getElementById('modalOverlay');
+
+        // 打开弹窗
         function openModal() {
-            document.getElementById("musicModal").style.display = "flex";
+            overlay.style.display = 'flex';
+            // 延迟一丁点时间以触发 CSS 过渡动画
+            setTimeout(() => overlay.classList.add('show'), 10);
         }
 
+        // 关闭弹窗
+        function closeModal() {
+            overlay.classList.remove('show');
+            // 等动画结束后隐藏 DOM
+            setTimeout(() => overlay.style.display = 'none', 300);
+        }
+
+        // 跳转逻辑
         function goToMusic() {
-            window.location.href =
-                "https://qishui.douyin.com/s/ixoDJEgc/";
+            // 跳转前的整体淡出动效
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.4s ease';
+            
+            setTimeout(() => {
+                window.location.href = "https://qishui.douyin.com/s/ixoDJEgc/";
+            }, 400);
         }
-
-        // 点击遮罩关闭
-        window.onclick = function (event) {
-            const modal = document.getElementById("musicModal");
-
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        };
     </script>
-
 </body>
 </html>
