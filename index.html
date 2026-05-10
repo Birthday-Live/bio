@@ -15,23 +15,23 @@
         </div>
 
         <div class="nav-list">
-            <a href="https://b23.tv/1NE6ycz" class="nav-item">
+            <div class="nav-item" onclick="handleNavigation('bili', '水喝千束', 'https://b23.tv/1NE6ycz')">
                 <div class="item-info">
                     <div class="dot" style="background-color: var(--accent-bili);"></div>
                     <span class="label">哔哩哔哩-水喝千束</span>
                 </div>
                 <span class="arrow">∟</span>
-            </a>
+            </div>
 
-            <a href="https://b23.tv/o7b2x5u" class="nav-item">
+            <div class="nav-item" onclick="handleNavigation('bili', '次放Studio', 'https://b23.tv/o7b2x5u')">
                 <div class="item-info">
                     <div class="dot" style="background-color: var(--accent-studio);"></div>
                     <span class="label">哔哩哔哩-次放Studio</span>
                 </div>
                 <span class="arrow">∟</span>
-            </a>
+            </div>
 
-            <div class="nav-item" onclick="openModal()" style="cursor: pointer;">
+            <div class="nav-item" onclick="handleNavigation('music', '水喝千束', 'https://qishui.douyin.com/s/ixoDJEgc/')">
                 <div class="item-info">
                     <div class="dot" style="background-color: var(--accent-music);"></div>
                     <span class="label">汽水音乐-水喝千束</span>
@@ -41,44 +41,15 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
-        <div class="modal-card" onclick="event.stopPropagation()">
-            <h3>提示</h3>
-            <p>
-                进入汽水歌曲界面后，点击关注即可。<br><br>
-                若已在抖音关注「水喝千束」，系统将自动同步，无需重复操作。
-            </p>
-            <button class="modal-btn" onclick="goToMusic()">知道了，继续前往</button>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <h3 id="modalTitle">提示</h3>
+            <p id="modalBody"></p>
+            <button class="modal-btn" id="confirmBtn">确认前往</button>
+            <button class="modal-btn btn-secondary" onclick="closeModal()">取消</button>
         </div>
     </div>
 
-    <script>
-        const overlay = document.getElementById('modalOverlay');
-
-        // 打开弹窗
-        function openModal() {
-            overlay.style.display = 'flex';
-            // 延迟一丁点时间以触发 CSS 过渡动画
-            setTimeout(() => overlay.classList.add('show'), 10);
-        }
-
-        // 关闭弹窗
-        function closeModal() {
-            overlay.classList.remove('show');
-            // 等动画结束后隐藏 DOM
-            setTimeout(() => overlay.style.display = 'none', 300);
-        }
-
-        // 跳转逻辑
-        function goToMusic() {
-            // 跳转前的整体淡出动效
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.4s ease';
-            
-            setTimeout(() => {
-                window.location.href = "https://qishui.douyin.com/s/ixoDJEgc/";
-            }, 400);
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
